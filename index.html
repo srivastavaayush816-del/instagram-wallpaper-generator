@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Wallpaper Generator</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #000; color: #fff; }
+        canvas { border: 2px solid #fff; margin: 20px; }
+        input, button { padding: 10px; margin: 5px; font-size: 16px; }
+        .wallpaper { width: 1080px; height: 1080px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); }
+    </style>
+</head>
+<body>
+    <h1>🎨 Instagram Wallpaper Generator</h1>
+    <canvas id="canvas" class="wallpaper"></canvas><br>
+    Background Color: <input type="color" id="bgColor" value="#ff6b6b"><br>
+    Text: <input type="text" id="text" value="Your Anime Quote Here" style="width:300px;"><br>
+    Text Color: <input type="color" id="textColor" value="#fff"><br>
+    <button onclick="generate()">Generate Wallpaper</button>
+    <button onclick="download()">Download PNG</button>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function generate() {
+            ctx.fillStyle = document.getElementById('bgColor').value;
+            ctx.fillRect(0, 0, 1080, 1080);
+            
+            ctx.fillStyle = document.getElementById('textColor').value;
+            ctx.font = 'bold 80px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(document.getElementById('text').value, 540, 540);
+        }
+        
+        function download() {
+            const link = document.createElement('a');
+            link.download = 'instagram-wallpaper.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        generate(); // Auto-generate first
+    </script>
+</body>
+</html>
